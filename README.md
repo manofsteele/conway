@@ -24,7 +24,7 @@ The page will also contain a short explanation of the game's rules.
 
 ## Wireframe
 
-![Wireframe](conway.xml)
+![Wireframe](conway.png)
 
 This will be a single-screen app, and the focus will be on the grid, which will
 be in the center of the page. A short explanation of the game and its rules will
