@@ -68,12 +68,12 @@ let neighbors = [];
 }
 
 function renderBoard(board) {
-  let html;
+  let html = "";
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
-    html+= `<div>${board[i][j]}`;
+    html += `<div>${board[i][j]}</div>`;
     }
-    html+=`<br/>`;
+    html +=`<br/>`;
   }
   // return html;
   let boardDiv = document.getElementById("board");
