@@ -26,6 +26,8 @@ function createBoard() {
 // update the boards
 function updateBoards(board, nextBoard) {
 
+console.log("update running");
+
 let neighbors = [];
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
@@ -33,38 +35,56 @@ let neighbors = [];
         rightNeighborIndex,
         topNeighborIndex,
         bottomNeighborIndex;
-      i === 0 ? leftNeighborIndex = board.length - 1 : leftNeighborIndex = i;
-      i === board.length -1 ? rightNeighborIndex = 0 : rightNeighborIndex = i;
-      j === 0 ? topNeighborIndex = board.length - 1 : topNeighborIndex = j;
-      j === board.length -1 ? bottomNeighborIndex = 0 : bottomNeighborIndex = j;
-      neighbors.push(board[leftNeighborIndex][topNeighborIndex]);
-      neighbors.push(board[i][topNeighborIndex]);
-      neighbors.push(board[rightNeighborIndex][topNeighborIndex]);
-      neighbors.push(board[leftNeighborIndex][j]);
-      neighbors.push(board[rightNeighborIndex][j]);
-      neighbors.push(board[leftNeighborIndex][bottomNeighborIndex]);
-      neighbors.push(board[i][bottomNeighborIndex]);
-      neighbors.push(board[rightNeighborIndex][bottomNeighborIndex]);
+      i === 0 ? topNeighborIndex = board.length - 1 : topNeighborIndex = i - 1;
+      i === board.length - 1 ? bottomNeighborIndex = 0 : bottomNeighborIndex = i + 1;
+      j === 0 ? leftNeighborIndex = board.length - 1 : leftNeighborIndex = j - 1;
+      j === board.length - 1 ? rightNeighborIndex = 0 : rightNeighborIndex = j + 1;
+      neighbors.push(board[topNeighborIndex][leftNeighborIndex]);
+      neighbors.push(board[topNeighborIndex][j]);
+      neighbors.push(board[topNeighborIndex][rightNeighborIndex]);
+      neighbors.push(board[i][leftNeighborIndex]);
+      neighbors.push(board[i][rightNeighborIndex]);
+      neighbors.push(board[bottomNeighborIndex][leftNeighborIndex]);
+      neighbors.push(board[bottomNeighborIndex][j]);
+      neighbors.push(board[bottomNeighborIndex][rightNeighborIndex]);
       let sum = neighbors.reduce( (a, b) => a + b, 0);
+      if (board[i][j] === 1) {
+       // console.log(`i is ${i} and j is ${j}`);
+       // console.log(`indices are (l, r, t, b): ${leftNeighborIndex},
+       // ${rightNeighborIndex}, ${topNeighborIndex}, ${bottomNeighborIndex}`);
+       // console.log(neighbors);
+       // console.log(sum);
+       // console.log(board[i][j]);
+      }
       let numLiving = 0;
       if (board[i][j] === 0) {
         sum === 3 ? nextBoard[i][j] = 1 : nextBoard[i][j] = 0;
       } else {
         switch (sum) {
-          case sum < 2:
+          case 0: case 1:
             nextBoard[i][j] = 0;
             break;
-          case sum === 2 || sum === 3:
+          case 2: case 3:
             nextBoard[i][j] = 1;
             break;
-          case sum > 3:
+          default:
             nextBoard[i][j] = 0;
         }
+        console.log(nextBoard[i][j]);
         numLiving++;
       }
-
+      neighbors = [];
     }
   }
+  console.log(board[0][0]);
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      board[i][j] = nextBoard[i][j];
+    }
+  }
+  console.log(board[0][0]);
+
+  renderBoard(board);
 }
 
 function populateRandomBoard(board) {
@@ -92,17 +112,43 @@ function renderBoard(board) {
   boardDiv.innerHTML = html;
 }
 
+function stepBoard(board) {
 
+
+}
 
 function game() {
   const board = createBoard();
   const newBoard = createBoard();
-  populateRandomBoard(board);
+  // populateRandomBoard(board);
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      board[i][j] = 0;
+    }
+  }
+
+  board[5][3] = 1;
+  board[5][4] = 1;
+  board[5][7] = 1;
+  board[5][8] = 1;
+  board[5][9] = 1;
+  board[4][6] = 1;
+  board[3][4] = 1;
   renderBoard(board);
+  setTimeout(() => updateBoards(board, newBoard), 1000);
+  setTimeout(() => updateBoards(board, newBoard), 1000);
+
+
+
+  // updateBoards(board, newBoard);
+  for (let i = 0; i < 100; i++) {
+    setTimeout(() => updateBoards(board, newBoard), 1000);
+  }
+  // let stepButton = document.getElementById('step');
+  // stepButton.addEventListener("click", updateBoards(board, newBoard));
   // set up some initial state;
   // keep updating boards;
   // give user a way to stop it
-
 }
 
 game();

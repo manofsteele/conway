@@ -21,3 +21,9 @@
 .living {
   background-color: black;
 }
+
+.button {
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
