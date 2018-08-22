@@ -67,11 +67,23 @@ let neighbors = [];
   }
 }
 
+function populateRandomBoard(board) {
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      board[i][j] = Math.round(Math.random());
+    }
+  }
+}
+
 function renderBoard(board) {
   let html = "";
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
-    html += `<div>${board[i][j]}</div>`;
+      if (board[i][j] === 0) {
+        html += `<ul class="tile"></ul>`;
+      } else {
+        html += `<ul class="tile living"></ul>`;
+      }
     }
     html +=`<br/>`;
   }
@@ -81,9 +93,11 @@ function renderBoard(board) {
 }
 
 
+
 function game() {
   const board = createBoard();
   const newBoard = createBoard();
+  populateRandomBoard(board);
   renderBoard(board);
   // set up some initial state;
   // keep updating boards;
