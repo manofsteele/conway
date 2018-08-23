@@ -1,13 +1,27 @@
 things to do:
 
-make step, stop and start buttons work
+make step, stop and start buttons work -- done
 make it look good
+don't let start button start if it's clear
+--reset button should reset but not start
+--clear button should stop interval as well
+--
 
-things to add:
 
+ideas for things to add:
+
+maybe turn board into an object which has properties for clear/not clear, moving/not moving,
+  number of living cells...?
+display number/percentage of living cells
+have color ramp slowly change every 100 generations?
 let user vary the speed
 let user click tiles themselves to start
 let user add some common shapes
-or pick some of the good starting configurations
+--or pick some of the good starting configurations
+--let user vary percentage of living squares at beginning (for random option)
 investigate redrawing algorithms
-let user pick different redrawing algorithm, and set speed to show differences
+--let user pick different redrawing algorithm, and set speed to show differences
+explanatory text -- maybe that pops up on hovering over certain tools?
+--possible to make a border of all 0's, if wrap is not desired
+--http://www.jagregory.com/abrash-black-book/#chapter-17-the-game-of-life
+  --two-chapter discussion of optimizations of Conway's Game of Life

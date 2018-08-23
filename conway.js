@@ -10,12 +10,16 @@
 // Live = 1, dead = 0
 
 // let boardDiv = document.getElementById("board");
+let numLiving = 0;
+let numGenerations = 0;
+let boardSize;
 
 function createBoard() {
   const board = new Array(60);
   for (let i = 0; i < board.length; i++) {
     board[i] = new Array(60);
   }
+  boardSize = board.length * board.length;
   return board;
 }
 
@@ -35,6 +39,7 @@ function clearBoard(board) {
 // update the boards
 function updateBoard(board) {
 
+numLiving = 0;
 // console.log("update running");
 const nextBoard = createBoard();
 
@@ -66,7 +71,6 @@ let neighbors = [];
        // console.log(sum);
        // console.log(board[i][j]);
       }
-      let numLiving = 0;
       if (board[i][j] === 0) {
         sum === 3 ? nextBoard[i][j] = 1 : nextBoard[i][j] = 0;
       } else {
@@ -80,19 +84,17 @@ let neighbors = [];
           default:
             nextBoard[i][j] = 0;
         }
-        // console.log(nextBoard[i][j]);
         numLiving++;
       }
       neighbors = [];
     }
   }
-  // console.log(board[0][0]);
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
       board[i][j] = nextBoard[i][j];
     }
   }
-  // console.log(board[0][0]);
+  numGenerations += 1;
 
   renderBoard(board);
 }
@@ -117,6 +119,10 @@ function renderBoard(board) {
     }
     html +=`<br/>`;
   }
+  html +=`<br/>`;
+  html +=`<div class="stats">Number of living cells: ${numLiving}</br>`;
+  html +=`Percentage of living cells: ${Math.round( (numLiving / boardSize) * 100 )}</br>`;
+  html +=`Number of generations: ${numGenerations}</div><br?>`;
   // return html;
   let boardDiv = document.getElementById("board");
   boardDiv.innerHTML = html;
@@ -146,9 +152,17 @@ function startBoard(board) {
   timer = setInterval(() => updateBoard(board), 100);
   stopButton.addEventListener("click", () => {
     clearInterval(timer);
-    console.log("it's stopping");
   });
 }
+
+function resetBoard(board) {
+  clearBoard(board);
+  populateRandomBoard(board);
+  numGenerations = 0;
+  numLiving = 0;
+  renderBoard(board);
+}
+
 
 function game() {
   const board = createBoard();
@@ -158,9 +172,6 @@ function game() {
 
 
   renderBoard(board);
-  // setTimeout(() => updateBoard(board, newBoard), 1000);
-  // setTimeout(() => updateBoard(board, newBoard), 1000);
-
 
   //
   // updateBoard(board, newBoard);
@@ -178,13 +189,7 @@ function game() {
   clearButton.addEventListener("click", () => clearBoard(board));
 
   let resetButton = document.getElementById('reset');
-  resetButton.addEventListener("click", () => {
-    clearBoard(board);
-    populateRandomBoard(board);
-    renderBoard(board);
-  });
-
-  // startBoard(board);
+  resetButton.addEventListener("click", () => resetBoard(board));
 
 }
 
