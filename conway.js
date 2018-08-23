@@ -25,6 +25,7 @@ function clearBoard(board) {
       board[i][j] = 0;
     }
   }
+  renderBoard(board);
 }
 
 // Sum values of 8 neighboring cells, as outlined above.
@@ -142,8 +143,11 @@ function populateCrazyBoard(board) {
 function startBoard(board) {
   let timer;
   let stopButton = document.getElementById('stop');
-  stopButton.addEventListener("click", () => clearInterval(timer));
   timer = setInterval(() => updateBoard(board), 100);
+  stopButton.addEventListener("click", () => {
+    clearInterval(timer);
+    console.log("it's stopping");
+  });
 }
 
 function game() {
@@ -158,11 +162,14 @@ function game() {
   // setTimeout(() => updateBoard(board, newBoard), 1000);
 
 
+  //
+  // updateBoard(board, newBoard);
+  // // for (let i = 0; i < 100; i++) {
+  //   setInterval(() => updateBoard(board, newBoard), 100);
+  // // }
 
-  updateBoard(board, newBoard);
-  // for (let i = 0; i < 100; i++) {
-    setInterval(() => updateBoard(board, newBoard), 100);
-  // }
+  let startButton = document.getElementById('start');
+  startButton.addEventListener("click", () => startBoard(board));
 
   let stepButton = document.getElementById('step');
   stepButton.addEventListener("click", () => updateBoard(board));
@@ -174,9 +181,10 @@ function game() {
   resetButton.addEventListener("click", () => {
     clearBoard(board);
     populateRandomBoard(board);
+    renderBoard(board);
   });
 
-  startBoard(board);
+  // startBoard(board);
 
 }
 

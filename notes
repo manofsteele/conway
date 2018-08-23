@@ -1,0 +1,13 @@
+things to do:
+
+make step, stop and start buttons work
+make it look good
+
+things to add:
+
+let user vary the speed
+let user click tiles themselves to start
+let user add some common shapes
+or pick some of the good starting configurations
+investigate redrawing algorithms
+let user pick different redrawing algorithm, and set speed to show differences
