@@ -13,6 +13,9 @@
 let numLiving = 0;
 let numGenerations = 0;
 let boardSize;
+let staticGenerations = 0;
+let percentage = 50;
+
 
 function createBoard() {
   const board = new Array(60);
@@ -39,6 +42,7 @@ function clearBoard(board) {
 // update the boards
 function updateBoard(board) {
 
+let lastNumLiving = numLiving;
 numLiving = 0;
 // console.log("update running");
 const nextBoard = createBoard();
@@ -97,14 +101,33 @@ let neighbors = [];
   numGenerations += 1;
 
   renderBoard(board);
+  if (lastNumLiving === numLiving) {
+    staticGenerations += 1;
+    if (staticGenerations > 2) {
+      let stopButton = document.getElementById('stop');
+      stopButton.click();
+      staticGenerations = 0;
+    }
+  } else {
+    staticGenerations = 0;
+  }
 }
 
-function populateRandomBoard(board) {
+function populateRandomBoard(board, pct) {
+  let rand;
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
-      board[i][j] = Math.round(Math.random());
+      rand = Math.random();
+      if (rand > pct/100) {
+        board[i][j] = 0;
+      } else {
+        board[i][j] = 1;
+      }
+      // board[i][j] = Math.round(Math.random() * (2 * pct / 100));
     }
   }
+  console.log(Math.round(Math.random() * (2 * pct / 100)));
+  percentage = pct;
 }
 
 function renderBoard(board) {
@@ -122,8 +145,12 @@ function renderBoard(board) {
   html +=`<br/>`;
   html +=`<div class="stats">Number of living cells: ${numLiving}</br>`;
   html +=`Percentage of living cells: ${Math.round( (numLiving / boardSize) * 100 )}</br>`;
-  html +=`Number of generations: ${numGenerations}</div><br?>`;
-  // return html;
+  html +=`Number of generations: ${numGenerations}<br/>`;
+  // html +=`<form onsubmit="handlePercentageInput()">`;
+  html +=`Set percentage of squares living for new rounds:
+  <input type="text" id="percentageInput"></input>`;
+  html += `<button class="button" onClick="handlePercentageInput()">Submit</button></div><br/>`;
+  // html += `</form>`;
   let boardDiv = document.getElementById("board");
   boardDiv.innerHTML = html;
 }
@@ -157,17 +184,26 @@ function startBoard(board) {
 
 function resetBoard(board) {
   clearBoard(board);
-  populateRandomBoard(board);
+  populateRandomBoard(board, percentage);
   numGenerations = 0;
   numLiving = 0;
   renderBoard(board);
 }
 
+function handlePercentageInput() {
+  console.log("this is running");
+  let input = document.getElementById("percentageInput").value;
+  if (input >= 0 && input <= 100) {
+    percentage = input;
+  }
+  console.log(input);
+  console.log(percentage);
+}
 
 function game() {
   const board = createBoard();
   const newBoard = createBoard();
-  populateRandomBoard(board);
+  populateRandomBoard(board, percentage);
   // populateCrazyBoard(board);
 
 
