@@ -1,14 +1,15 @@
 .board {
   display: flex;
   flex-direction: row;
-  width: 400px;
-  height: 400px;
+  width: 600px;
+  height: 600px;
   flex-wrap: wrap;
+  line-height: 10px;
 }
 
 .tile {
-  min-width: 18px;
-  height: 18px;
+  min-width: 8px;
+  height: 8px;
   background-color: white;
   list-style: none;
   display: block;

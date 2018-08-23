@@ -12,11 +12,19 @@
 // let boardDiv = document.getElementById("board");
 
 function createBoard() {
-  const board = new Array(20);
+  const board = new Array(60);
   for (let i = 0; i < board.length; i++) {
-    board[i] = new Array(20);
+    board[i] = new Array(60);
   }
   return board;
+}
+
+function clearBoard(board) {
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board.length; j++) {
+      board[i][j] = 0;
+    }
+  }
 }
 
 // Sum values of 8 neighboring cells, as outlined above.
@@ -24,9 +32,10 @@ function createBoard() {
 // if value in first array is 0, apply fourth rule, and set value in next board array.
 
 // update the boards
-function updateBoards(board, nextBoard) {
+function updateBoard(board) {
 
-console.log("update running");
+// console.log("update running");
+const nextBoard = createBoard();
 
 let neighbors = [];
   for (let i = 0; i < board.length; i++) {
@@ -70,19 +79,19 @@ let neighbors = [];
           default:
             nextBoard[i][j] = 0;
         }
-        console.log(nextBoard[i][j]);
+        // console.log(nextBoard[i][j]);
         numLiving++;
       }
       neighbors = [];
     }
   }
-  console.log(board[0][0]);
+  // console.log(board[0][0]);
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
       board[i][j] = nextBoard[i][j];
     }
   }
-  console.log(board[0][0]);
+  // console.log(board[0][0]);
 
   renderBoard(board);
 }
@@ -112,15 +121,9 @@ function renderBoard(board) {
   boardDiv.innerHTML = html;
 }
 
-function stepBoard(board) {
 
 
-}
-
-function game() {
-  const board = createBoard();
-  const newBoard = createBoard();
-  // populateRandomBoard(board);
+function populateCrazyBoard(board) {
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board.length; j++) {
       board[i][j] = 0;
@@ -134,21 +137,47 @@ function game() {
   board[5][9] = 1;
   board[4][6] = 1;
   board[3][4] = 1;
+}
+
+function startBoard(board) {
+  let timer;
+  let stopButton = document.getElementById('stop');
+  stopButton.addEventListener("click", () => clearInterval(timer));
+  timer = setInterval(() => updateBoard(board), 100);
+}
+
+function game() {
+  const board = createBoard();
+  const newBoard = createBoard();
+  populateRandomBoard(board);
+  // populateCrazyBoard(board);
+
+
   renderBoard(board);
-  setTimeout(() => updateBoards(board, newBoard), 1000);
-  setTimeout(() => updateBoards(board, newBoard), 1000);
+  // setTimeout(() => updateBoard(board, newBoard), 1000);
+  // setTimeout(() => updateBoard(board, newBoard), 1000);
 
 
 
-  // updateBoards(board, newBoard);
-  for (let i = 0; i < 100; i++) {
-    setTimeout(() => updateBoards(board, newBoard), 1000);
-  }
-  // let stepButton = document.getElementById('step');
-  // stepButton.addEventListener("click", updateBoards(board, newBoard));
-  // set up some initial state;
-  // keep updating boards;
-  // give user a way to stop it
+  updateBoard(board, newBoard);
+  // for (let i = 0; i < 100; i++) {
+    setInterval(() => updateBoard(board, newBoard), 100);
+  // }
+
+  let stepButton = document.getElementById('step');
+  stepButton.addEventListener("click", () => updateBoard(board));
+
+  let clearButton = document.getElementById('clear');
+  clearButton.addEventListener("click", () => clearBoard(board));
+
+  let resetButton = document.getElementById('reset');
+  resetButton.addEventListener("click", () => {
+    clearBoard(board);
+    populateRandomBoard(board);
+  });
+
+  startBoard(board);
+
 }
 
 game();
