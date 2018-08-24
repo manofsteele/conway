@@ -186,8 +186,6 @@ function handlePercentageInput(board) {
     stopBoard(board);
     resetBoard(board);
   }
-  console.log(input);
-  console.log(board.percentage);
 }
 
 
