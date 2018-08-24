@@ -10,27 +10,36 @@
 // Live = 1, dead = 0
 
 // let boardDiv = document.getElementById("board");
-let numLiving = 0;
-let numGenerations = 0;
-let boardSize;
-let staticGenerations = 0;
-let percentage = 50;
-let timer;
-
+// let numLiving = 0;
+// let numGenerations = 0;
+// let size;
+// let staticGenerations = 0;
+// let percentage = 50;
+// let timer;
+//
 
 function createBoard() {
-  const board = new Array(60);
-  for (let i = 0; i < board.length; i++) {
-    board[i] = new Array(60);
+  const grid = new Array(60);
+  for (let i = 0; i < grid.length; i++) {
+    grid[i] = new Array(60);
   }
-  boardSize = board.length * board.length;
+  const board = {
+    grid: grid,
+    numLiving: 0,
+    numGenerations: 0,
+    size: grid.length * grid.length,
+    staticGenerations: 0,
+    percentage: 50,
+    timer: null
+  };
+  // size = board.grid.length * board.grid.length;
   return board;
 }
 
 function clearBoard(board) {
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board.length; j++) {
-      board[i][j] = 0;
+  for (let i = 0; i < board.grid.length; i++) {
+    for (let j = 0; j < board.grid.length; j++) {
+      board.grid[i][j] = 0;
     }
   }
   renderBoard(board);
@@ -43,99 +52,90 @@ function clearBoard(board) {
 // update the boards
 function updateBoard(board) {
 
-let lastNumLiving = numLiving;
-numLiving = 0;
+let lastNumLiving = board.numLiving;
+board.numLiving = 0;
 // console.log("update running");
 const nextBoard = createBoard();
 
 let neighbors = [];
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board.length; j++) {
+  for (let i = 0; i < board.grid.length; i++) {
+    for (let j = 0; j < board.grid.length; j++) {
       let leftNeighborIndex,
         rightNeighborIndex,
         topNeighborIndex,
         bottomNeighborIndex;
-      i === 0 ? topNeighborIndex = board.length - 1 : topNeighborIndex = i - 1;
-      i === board.length - 1 ? bottomNeighborIndex = 0 : bottomNeighborIndex = i + 1;
-      j === 0 ? leftNeighborIndex = board.length - 1 : leftNeighborIndex = j - 1;
-      j === board.length - 1 ? rightNeighborIndex = 0 : rightNeighborIndex = j + 1;
-      neighbors.push(board[topNeighborIndex][leftNeighborIndex]);
-      neighbors.push(board[topNeighborIndex][j]);
-      neighbors.push(board[topNeighborIndex][rightNeighborIndex]);
-      neighbors.push(board[i][leftNeighborIndex]);
-      neighbors.push(board[i][rightNeighborIndex]);
-      neighbors.push(board[bottomNeighborIndex][leftNeighborIndex]);
-      neighbors.push(board[bottomNeighborIndex][j]);
-      neighbors.push(board[bottomNeighborIndex][rightNeighborIndex]);
+      i === 0 ? topNeighborIndex = board.grid.length - 1 : topNeighborIndex = i - 1;
+      i === board.grid.length - 1 ? bottomNeighborIndex = 0 : bottomNeighborIndex = i + 1;
+      j === 0 ? leftNeighborIndex = board.grid.length - 1 : leftNeighborIndex = j - 1;
+      j === board.grid.length - 1 ? rightNeighborIndex = 0 : rightNeighborIndex = j + 1;
+      neighbors.push(board.grid[topNeighborIndex][leftNeighborIndex]);
+      neighbors.push(board.grid[topNeighborIndex][j]);
+      neighbors.push(board.grid[topNeighborIndex][rightNeighborIndex]);
+      neighbors.push(board.grid[i][leftNeighborIndex]);
+      neighbors.push(board.grid[i][rightNeighborIndex]);
+      neighbors.push(board.grid[bottomNeighborIndex][leftNeighborIndex]);
+      neighbors.push(board.grid[bottomNeighborIndex][j]);
+      neighbors.push(board.grid[bottomNeighborIndex][rightNeighborIndex]);
       let sum = neighbors.reduce( (a, b) => a + b, 0);
-      if (board[i][j] === 1) {
-       // console.log(`i is ${i} and j is ${j}`);
-       // console.log(`indices are (l, r, t, b): ${leftNeighborIndex},
-       // ${rightNeighborIndex}, ${topNeighborIndex}, ${bottomNeighborIndex}`);
-       // console.log(neighbors);
-       // console.log(sum);
-       // console.log(board[i][j]);
-      }
-      if (board[i][j] === 0) {
-        sum === 3 ? nextBoard[i][j] = 1 : nextBoard[i][j] = 0;
+
+      if (board.grid[i][j] === 0) {
+        sum === 3 ? nextBoard.grid[i][j] = 1 : nextBoard.grid[i][j] = 0;
       } else {
         switch (sum) {
           case 0: case 1:
-            nextBoard[i][j] = 0;
+            nextBoard.grid[i][j] = 0;
             break;
           case 2: case 3:
-            nextBoard[i][j] = 1;
+            nextBoard.grid[i][j] = 1;
             break;
           default:
-            nextBoard[i][j] = 0;
+            nextBoard.grid[i][j] = 0;
         }
-        numLiving++;
+        board.numLiving++;
       }
       neighbors = [];
     }
   }
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board.length; j++) {
-      board[i][j] = nextBoard[i][j];
+  for (let i = 0; i < board.grid.length; i++) {
+    for (let j = 0; j < board.grid.length; j++) {
+      board.grid[i][j] = nextBoard.grid[i][j];
     }
   }
-  numGenerations += 1;
+  board.numGenerations += 1;
 
   renderBoard(board);
-  if (lastNumLiving === numLiving) {
-    staticGenerations += 1;
-    if (staticGenerations > 2) {
+  if (lastNumLiving === board.numLiving) {
+    board.staticGenerations += 1;
+    if (board.staticGenerations > 2) {
       let stopButton = document.getElementById('stop');
       stopButton.click();
-      staticGenerations = 0;
+      board.staticGenerations = 0;
     }
   } else {
-    staticGenerations = 0;
+    board.staticGenerations = 0;
   }
 }
 
 function populateRandomBoard(board, pct) {
   let rand;
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board.length; j++) {
+  for (let i = 0; i < board.grid.length; i++) {
+    for (let j = 0; j < board.grid.length; j++) {
       rand = Math.random();
       if (rand > pct/100) {
-        board[i][j] = 0;
+        board.grid[i][j] = 0;
       } else {
-        board[i][j] = 1;
+        board.grid[i][j] = 1;
       }
-      // board[i][j] = Math.round(Math.random() * (2 * pct / 100));
     }
   }
-  console.log(Math.round(Math.random() * (2 * pct / 100)));
-  percentage = pct;
+  board.percentage = pct;
 }
 
 function renderBoard(board) {
   let html = "";
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board.length; j++) {
-      if (board[i][j] === 0) {
+  for (let i = 0; i < board.grid.length; i++) {
+    for (let j = 0; j < board.grid.length; j++) {
+      if (board.grid[i][j] === 0) {
         html += `<ul class="tile"></ul>`;
       } else {
         html += `<ul class="tile living"></ul>`;
@@ -147,9 +147,9 @@ function renderBoard(board) {
   let boardDiv = document.getElementById("board");
   boardDiv.innerHTML = html;
   html = "";
-  html +=`<div class="stats">Number of living cells: ${numLiving}</br>`;
-  html +=`Percentage of living cells: ${Math.round( (numLiving / boardSize) * 100 )}</br>`;
-  html +=`Number of generations: ${numGenerations}<br/>`;
+  html +=`<div class="stats">Number of living cells: ${board.numLiving}</br>`;
+  html +=`Percentage of living cells: ${Math.round( (board.numLiving / board.size) * 100 )}</br>`;
+  html +=`Number of generations: ${board.numGenerations}<br/>`;
   html +=`Set percentage of squares living for new rounds:
   <input type="text" id="percentageInput"></input>`;
   html += `<button class="button" onClick="handlePercentageInput()">Submit</button></div><br/>`;
@@ -159,50 +159,50 @@ function renderBoard(board) {
 
 
 function populateCrazyBoard(board) {
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board.length; j++) {
-      board[i][j] = 0;
+  for (let i = 0; i < board.grid.length; i++) {
+    for (let j = 0; j < board.grid.length; j++) {
+      board.grid[i][j] = 0;
     }
   }
 
-  board[5][3] = 1;
-  board[5][4] = 1;
-  board[5][7] = 1;
-  board[5][8] = 1;
-  board[5][9] = 1;
-  board[4][6] = 1;
-  board[3][4] = 1;
+  board.grid[5][3] = 1;
+  board.grid[5][4] = 1;
+  board.grid[5][7] = 1;
+  board.grid[5][8] = 1;
+  board.grid[5][9] = 1;
+  board.grid[4][6] = 1;
+  board.grid[3][4] = 1;
 }
 
 function startBoard(board) {
   let stopButton = document.getElementById('stop');
-  timer = setInterval(() => updateBoard(board), 50);
+  board.timer = setInterval(() => updateBoard(board), 50);
   stopButton.addEventListener("click", () => stopBoard(board));
 }
 
 function stopBoard(board) {
-  clearInterval(timer);
+  clearInterval(board.timer);
 }
 
 function resetBoard(board) {
   clearBoard(board);
-  populateRandomBoard(board, percentage);
-  numGenerations = 0;
-  numLiving = 0;
+  populateRandomBoard(board, board.percentage);
+  board.numGenerations = 0;
+  board.numLiving = 0;
   renderBoard(board);
 }
 
 function handlePercentageInput() {
   let input = document.getElementById("percentageInput").value;
   if (input >= 0 && input <= 100) {
-    percentage = input;
+    board.percentage = input;
   }
 }
 
 function game() {
   const board = createBoard();
   const newBoard = createBoard();
-  populateRandomBoard(board, percentage);
+  populateRandomBoard(board, board.percentage);
   // populateCrazyBoard(board);
 
 

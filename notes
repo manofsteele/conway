@@ -11,12 +11,12 @@ make step, stop and start buttons work -- done
 display number/percentage of living cells
 --game now stops when board has been static for more than two rounds
 --let user vary percentage of living squares at beginning (for random option)
+maybe turn board into an object which has properties for clear/not clear, moving/not moving,
+number of living cells...?  --just cells, not other two
 
 
 ideas for things to add:
 
-maybe turn board into an object which has properties for clear/not clear, moving/not moving,
-  number of living cells...?
 have color ramp slowly change every 100 generations?
 let user vary the speed?
 let user click tiles themselves to start?
