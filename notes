@@ -10,6 +10,7 @@ done:
 make step, stop and start buttons work -- done
 display number/percentage of living cells
 --game now stops when board has been static for more than two rounds
+--let user vary percentage of living squares at beginning (for random option)
 
 
 ideas for things to add:
@@ -20,8 +21,7 @@ have color ramp slowly change every 100 generations?
 let user vary the speed?
 let user click tiles themselves to start?
 let user add some common shapes
---or pick some of the good starting configurations
---let user vary percentage of living squares at beginning (for random option)
+--or pick some of the good starting configurations: "methuselahs"
 investigate redrawing algorithms
 --let user pick different redrawing algorithm, and set speed to show differences
 explanatory text -- maybe that pops up on hovering over certain tools?
@@ -35,4 +35,5 @@ things learned:
 can't have it stop if number of living is equal for only one generation
 --get value with   let input = document.getElementById("percentageInput").value,
   rather than .innerHTML
---
+--to make handlePercentageInput stop, reset and render, it needs access to the board,
+but it's not global variable. Maybe making it an object would work?

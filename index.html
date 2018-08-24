@@ -6,6 +6,8 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124440807-1"></script>
   <link rel="stylesheet" href="conway.css"></link>
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -16,14 +18,46 @@
 
   </head>
   <body>
-    <h1>Conway's Game of Life</h1>
-    <div id="board" class="board">
+    <div class="main">
+      <div class="header">
+        <h1>Choose Life. Choose <span style="font-style: italic;">Conway's Game of Life!</span></h1>
+        <div class="links">
+          <a href="https://github.com/manofsteele"><i class="fab fa-github" ></i></a>
+          <a href="https://www.linkedin.com/in/jeremiahsteele"><i class="fab fa-linkedin" ></i></a>
+        </div>
+      </div>
+      <p class="text">Conway's Game of Life is one of the earliest cellular-automata simulations.
+        From a set of simple rules, a fascinating show of complex, almost lifelike patterns blooms
+        in front of a viewer's eyes. You don't exactly play this game; rather, the game comes in
+        deciding whether a square is dark ("alive") or blank ("dead") in the next round. There are
+        only four rules.
+
+        From <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Wikipedia</a>:
+        <ul class="textList">
+          <li>Any live cell with fewer than two live neighbors dies, as if by underpopulation.</li>
+          <li>Any live cell with two or three live neighbors lives on to the next generation.</li>
+          <li>Any live cell with more than three live neighbors dies, as if by overpopulation.</li>
+          <li>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</li>
+        </ul>
+      </p>
+      <p class="text">This version of Conway's Game of Life lets you adjust the percentage of
+        living cells at the beginning of the game; any value not between 0 and 100 will default
+        to 50%. The highest and lowest percentages lead to
+        stable board states very quickly; those somewhere in the middle can have very long
+        lives. If the number of living cells hasn't changed in two generations, this game
+        stops. If you want, you can start the game back up and see if it springs back into
+        continuing activity.
+      </p>
+      <div id="board" class="board">
+      </div>
+      <button id="step" class="button">Step</button>
+      <button id="start" class="button">Start</button>
+      <button id="stop" class="button">Stop</button>
+      <button id="clear" class="button">Clear</button>
+      <button id="reset" class="button">Reset</button>
+      <div id="statsAndOptions" class="statsAndOptions">
+      </div>
+      <script src="conway.js"></script>
     </div>
-    <button id="step" class="button">Step</button>
-    <button id="start" class="button">Start</button>
-    <button id="stop" class="button">Stop</button>
-    <button id="clear" class="button">Clear</button>
-    <button id="reset" class="button">Reset</button>
-    <script src="conway.js"></script>
   </body>
 </html>

@@ -15,6 +15,7 @@ let numGenerations = 0;
 let boardSize;
 let staticGenerations = 0;
 let percentage = 50;
+let timer;
 
 
 function createBoard() {
@@ -143,16 +144,16 @@ function renderBoard(board) {
     html +=`<br/>`;
   }
   html +=`<br/>`;
+  let boardDiv = document.getElementById("board");
+  boardDiv.innerHTML = html;
+  html = "";
   html +=`<div class="stats">Number of living cells: ${numLiving}</br>`;
   html +=`Percentage of living cells: ${Math.round( (numLiving / boardSize) * 100 )}</br>`;
   html +=`Number of generations: ${numGenerations}<br/>`;
-  // html +=`<form onsubmit="handlePercentageInput()">`;
   html +=`Set percentage of squares living for new rounds:
   <input type="text" id="percentageInput"></input>`;
   html += `<button class="button" onClick="handlePercentageInput()">Submit</button></div><br/>`;
-  // html += `</form>`;
-  let boardDiv = document.getElementById("board");
-  boardDiv.innerHTML = html;
+  document.getElementById("statsAndOptions").innerHTML = html;
 }
 
 
@@ -174,12 +175,13 @@ function populateCrazyBoard(board) {
 }
 
 function startBoard(board) {
-  let timer;
   let stopButton = document.getElementById('stop');
-  timer = setInterval(() => updateBoard(board), 100);
-  stopButton.addEventListener("click", () => {
-    clearInterval(timer);
-  });
+  timer = setInterval(() => updateBoard(board), 50);
+  stopButton.addEventListener("click", () => stopBoard(board));
+}
+
+function stopBoard(board) {
+  clearInterval(timer);
 }
 
 function resetBoard(board) {
@@ -191,13 +193,10 @@ function resetBoard(board) {
 }
 
 function handlePercentageInput() {
-  console.log("this is running");
   let input = document.getElementById("percentageInput").value;
   if (input >= 0 && input <= 100) {
     percentage = input;
   }
-  console.log(input);
-  console.log(percentage);
 }
 
 function game() {
