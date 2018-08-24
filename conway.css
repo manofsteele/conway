@@ -14,13 +14,13 @@ body {
   justify-content: space-between;
   margin: 0;
   padding: 20px;
-  border-bottom: 1px solid #ffa500;
+  border-bottom: 1px solid #0013E5;
   margin-bottom: 30px;
 }
 
 h1 {
   font-family: Helvetica;
-  color: #ffa500;
+  color: #0013E5;
   font-weight: 500;
   font-size: 40px;
 }
@@ -34,7 +34,7 @@ h1 {
 
 .links > a {
   margin-left: 10px;
-  color: orange;
+  color: #0013E5;
 }
 
 .intro {
@@ -69,7 +69,7 @@ h1 {
 }
 
 .living {
-  background-color: blue;
+  background-color: #0013E5;
 }
 
 p {
