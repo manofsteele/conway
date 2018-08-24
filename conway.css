@@ -1,9 +1,9 @@
 body {
   margin: 0;
+  background-color: #e6ffff;
 }
 
 .main {
-  background-color: #e6ffff;
   /* display: flex;
   flex-direction: row; */
 }
@@ -106,4 +106,9 @@ input {
 .stats {
   line-height: 20px;
   letter-spacing: .5px;
+}
+
+.percentageInput {
+  margin: 0;
+  margin-left: 30px;
 }
