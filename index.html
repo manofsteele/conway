@@ -26,28 +26,30 @@
           <a href="https://www.linkedin.com/in/jeremiahsteele"><i class="fab fa-linkedin" ></i></a>
         </div>
       </div>
-      <p class="text">Conway's Game of Life is one of the earliest cellular-automata simulations.
-        From a set of simple rules, a fascinating show of complex, almost lifelike patterns blooms
-        in front of a viewer's eyes. You don't exactly play this game; rather, the game comes in
-        deciding whether a square is dark ("alive") or blank ("dead") in the next round. There are
-        only four rules.
+      <div class="intro">
+        <p class="text">Conway's Game of Life is one of the earliest cellular-automata simulations.
+          From a set of simple rules, a fascinating show of complex, almost lifelike patterns blooms
+          in front of a viewer's eyes. You don't exactly play this game; rather, the game comes in
+          deciding whether a square is dark ("alive") or blank ("dead") in the next round. There are
+          only four rules.
 
-        From <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Wikipedia</a>:
-        <ul class="textList">
-          <li>Any live cell with fewer than two live neighbors dies, as if by underpopulation.</li>
-          <li>Any live cell with two or three live neighbors lives on to the next generation.</li>
-          <li>Any live cell with more than three live neighbors dies, as if by overpopulation.</li>
-          <li>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</li>
-        </ul>
-      </p>
-      <p class="text">This version of Conway's Game of Life lets you adjust the percentage of
-        living cells at the beginning of the game; any value not between 0 and 100 will default
-        to 50%. The highest and lowest percentages lead to
-        stable board states very quickly; those somewhere in the middle can have very long
-        lives. If the number of living cells hasn't changed in two generations, this game
-        stops. If you want, you can start the game back up and see if it springs back into
-        continuing activity.
-      </p>
+          From <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Wikipedia</a>:
+          <ul class="textList">
+            <li>Any live cell with fewer than two live neighbors dies, as if by underpopulation.</li>
+            <li>Any live cell with two or three live neighbors lives on to the next generation.</li>
+            <li>Any live cell with more than three live neighbors dies, as if by overpopulation.</li>
+            <li>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</li>
+          </ul>
+        </p>
+        <p class="text">This version of Conway's Game of Life lets you adjust the percentage of
+          living cells at the beginning of the game; any value not between 0 and 100 will default
+          to 50%. The highest and lowest percentages lead to
+          stable board states very quickly; those somewhere in the middle can have very long
+          lives. If the number of living cells hasn't changed in two generations, this game
+          stops. If you want, you can start the game back up and see if it springs back into
+          continuing activity.
+        </p>
+      </div>
       <div id="board" class="board">
       </div>
       <button id="step" class="button">Step</button>

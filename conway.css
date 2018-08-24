@@ -37,6 +37,10 @@ h1 {
   color: orange;
 }
 
+.intro {
+  border-bottom: 1px solid grey;
+}
+
 .board {
   display: flex;
   flex-direction: row;
@@ -46,7 +50,8 @@ h1 {
   line-height: 8px;
   margin-left: 20px;
   margin-bottom: 20px;
-  padding: 0;
+  margin-top: 40px;
+  padding-top: 20px;
 }
 
 .tile {
