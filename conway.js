@@ -17,7 +17,8 @@
 // let percentage = 50;
 // let timer;
 //
-let board;
+// let board;
+let percentage;
 
 function createBoard() {
   const grid = new Array(60);
@@ -30,7 +31,7 @@ function createBoard() {
     numGenerations: 0,
     size: grid.length * grid.length,
     staticGenerations: 0,
-    percentage: 50,
+    // percentage: 50,
     timer: null
   };
   // size = board.grid.length * board.grid.length;
@@ -116,7 +117,7 @@ let neighbors = [];
   }
 }
 
-function populateRandomBoard(board, pct) {
+function populateRandomBoard(board, pct = 50) {
   let rand;
   for (let i = 0; i < board.grid.length; i++) {
     for (let j = 0; j < board.grid.length; j++) {
@@ -125,10 +126,11 @@ function populateRandomBoard(board, pct) {
         board.grid[i][j] = 0;
       } else {
         board.grid[i][j] = 1;
+        board.numLiving += 1;
       }
     }
   }
-  board.percentage = pct;
+  percentage = pct;
 }
 
 function renderBoard(board) {
@@ -186,7 +188,7 @@ function stopBoard(board) {
 
 function resetBoard(board) {
   clearBoard(board);
-  populateRandomBoard(board, board.percentage);
+  populateRandomBoard(board, percentage);
   board.numGenerations = 0;
   board.numLiving = 0;
   renderBoard(board);
@@ -195,16 +197,16 @@ function resetBoard(board) {
 function handlePercentageInput() {
   let input = document.getElementById("percentageInput").value;
   if (input >= 0 && input <= 100) {
-    board.percentage = input;
-    stopBoard(board);
-    resetBoard(board);
+    percentage = input;
+    // stopBoard(board);
+    // resetBoard(board);
   }
 }
 
 function game() {
   const board = createBoard();
   const newBoard = createBoard();
-  populateRandomBoard(board, board.percentage);
+  populateRandomBoard(board, percentage);
   // populateAcornBoard(board);
 
 
