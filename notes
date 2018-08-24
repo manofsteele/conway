@@ -12,8 +12,12 @@ display number/percentage of living cells
 --game now stops when board has been static for more than two rounds
 --let user vary percentage of living squares at beginning (for random option)
 maybe turn board into an object which has properties for clear/not clear, moving/not moving,
-number of living cells...?  --just cells, not other two
-
+  number of living cells...?  --just cells, not other two -- now complete; no
+  more global variables
+--to make handlePercentageInput stop, reset and render, it needs access to the board,
+  but it's not global variable. Maybe making it an object would work -- and it did.
+  it also helped to move the input into index.html, and add the event listener in code
+  rather than declaring it in the HTML.
 
 ideas for things to add:
 
@@ -35,5 +39,5 @@ things learned:
 can't have it stop if number of living is equal for only one generation
 --get value with   let input = document.getElementById("percentageInput").value,
   rather than .innerHTML
---to make handlePercentageInput stop, reset and render, it needs access to the board,
-but it's not global variable. Maybe making it an object would work?
+--found a board where it's oscillating between two counts of living tiles -- some other
+condition is necessary

@@ -46,8 +46,9 @@
           to 50%. The highest and lowest percentages lead to
           stable board states very quickly; those somewhere in the middle can have very long
           lives. If the number of living cells hasn't changed in two generations, this game
-          stops. If you want, you can start the game back up and see if it springs back into
-          continuing activity.
+          pauses. If you want, you can start the game back up and see if it springs back into
+          continuing activity. Sometimes the number will change, but the board will have
+          fallen into a stable, "oscillating" state of repeating patterns.
         </p>
       </div>
       <div id="boardGrid" class="boardGrid">
@@ -59,6 +60,10 @@
       <button id="reset" class="button">Reset</button>
       <div id="statsAndOptions" class="statsAndOptions">
       </div>
+      <p class= "stats">Set percentage of squares living for new rounds:
+        <input type="text" id="percentageInput"></input>
+        <button class="button" id="percentage">Submit</button></div><br/>
+      </p>
       <script src="conway.js"></script>
     </div>
   </body>
