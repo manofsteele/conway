@@ -1,11 +1,25 @@
 body {
+  /* background-color: #e6ffff; */
   margin: 0;
-  background-color: #e6ffff;
+
 }
+
 
 .main {
   /* display: flex;
   flex-direction: row; */
+  z-index: 0;
+}
+
+.background {
+  background-image: url(frame_0.jpg);
+  background-repeat: repeat;
+  position: absolute;
+  opacity: 0.05;
+  width: 100vw;
+  height: 1400px;
+  z-index: -1;
+  /* filter: alpha(opacity=20); */
 }
 
 .header {
