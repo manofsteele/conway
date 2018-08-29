@@ -5,9 +5,6 @@
     <title>Conway's Game of Life</title>
     <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124440807-1"></script>
-  <link rel="stylesheet" href="conway.css"></link>
-  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -15,6 +12,10 @@
 
     gtag('config', 'UA-124440807-1');
   </script>
+  <link rel="stylesheet" href="conway.css"></link>
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
 
   </head>
   <body>
@@ -27,6 +28,28 @@
           <a href="https://www.linkedin.com/in/jeremiahsteele"><i class="fab fa-linkedin" ></i></a>
         </div>
       </div>
+      <div class="boardAndInfo">
+        <div class="boardData">
+          <div id="statsAndOptions" class="statsAndOptions">
+          </div>
+          <p class= "percentageInput">Set percentage of squares living for new rounds (submitting will reset board):
+            <input type="text" id="percentageInput"></input>
+            <button class="button" id="percentage">Submit</button></div><br/>
+          </p>
+        </div>
+        <div class="boardAndButtons">
+          <div id="boardGrid" class="boardGrid">
+          </div>
+          <div id="buttons">
+            <button id="step" class="button">Step</button>
+            <button id="start" class="button">Start</button>
+            <button id="stop" class="button">Stop</button>
+            <button id="clear" class="button">Clear</button>
+            <button id="reset" class="button">Reset</button>
+          </div>
+        </div>
+      </div>
+
       <div class="intro">
         <p class="text">Conway's Game of Life is one of the earliest cellular-automata simulations.
           The mathematician John Horton Conway devised it in 1970. In the early days, games like this
@@ -57,19 +80,6 @@
           fallen into a stable, "oscillating" state of repeating patterns.
         </p>
       </div>
-      <div id="boardGrid" class="boardGrid">
-      </div>
-      <button id="step" class="button">Step</button>
-      <button id="start" class="button">Start</button>
-      <button id="stop" class="button">Stop</button>
-      <button id="clear" class="button">Clear</button>
-      <button id="reset" class="button">Reset</button>
-      <div id="statsAndOptions" class="statsAndOptions">
-      </div>
-      <p class= "percentageInput">Set percentage of squares living for new rounds (submitting will reset board):
-        <input type="text" id="percentageInput"></input>
-        <button class="button" id="percentage">Submit</button></div><br/>
-      </p>
       <script src="conway.js"></script>
     </div>
   </body>

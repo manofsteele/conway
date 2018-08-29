@@ -55,6 +55,28 @@ h1 {
   border-bottom: 1px solid grey;
 }
 
+.boardAndInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+.boardData {
+  max-width: 300px;
+}
+
+.percentageInput {
+  margin: 0;
+  margin-left: 30px;
+}
+
+.boardAndButtons {
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
 .boardGrid {
   display: flex;
   flex-direction: row;
@@ -64,7 +86,6 @@ h1 {
   line-height: 8px;
   margin-left: 20px;
   margin-bottom: 20px;
-  margin-top: 40px;
   padding-top: 20px;
 }
 
@@ -110,7 +131,12 @@ input {
   border-radius: 3px;
   margin-left: 20px;
   margin-bottom: 20px;
+  font-size: 20px;
 }
+
+
+
+
 
 .statsAndOptions {
   margin-left: 30px;
@@ -120,9 +146,4 @@ input {
 .stats {
   line-height: 20px;
   letter-spacing: .5px;
-}
-
-.percentageInput {
-  margin: 0;
-  margin-left: 30px;
 }
