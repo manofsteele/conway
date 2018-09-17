@@ -1,4 +1,4 @@
-# Conway's game of life
+# Conway's Game of Life
 
 [Live site](https://manofsteele.github.io/conway)
 
@@ -6,7 +6,7 @@
 
 ## Background
 
-Conway's game of life is not a game in the usual sense of the word. The only
+Conway's Game of Life is not a game in the usual sense of the word. The only
 "player" is the computer. The game takes place on a two-dimensional grid of squares,
 each of which is one of two colors. One of these colors is designated as "alive",
 and the others are called "dead" squares. A simple set of rules governs the state
