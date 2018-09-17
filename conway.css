@@ -1,13 +1,8 @@
 body {
-  /* background-color: #e6ffff; */
   margin: 0;
-
 }
 
-
 .main {
-  /* display: flex;
-  flex-direction: row; */
   z-index: 0;
 }
 
@@ -153,10 +148,6 @@ input {
   margin-bottom: 20px;
   font-size: 20px;
 }
-
-
-
-
 
 .statsAndOptions {
   margin-left: 30px;

@@ -25,6 +25,8 @@ function createBoard() {
   return board;
 }
 
+// Populates a random selection of cells with a designated percentage 
+// of "living" cells.
 
 function populateRandomBoard(board, pct = 50) {
   let rand;
@@ -42,6 +44,9 @@ function populateRandomBoard(board, pct = 50) {
   board.percentage = pct;
 }
 
+// This is not used for now; it is for implementation later, when it is 
+// projected to add different starting configurations.
+
 function populateAcornBoard(board) {
   for (let i = 0; i < board.grid.length; i++) {
     for (let j = 0; j < board.grid.length; j++) {
@@ -58,6 +63,7 @@ function populateAcornBoard(board) {
   board.grid[3][4] = 1;
 }
 
+// Renders board based on which cells are living or dead. 
 
 function renderBoard(board) {
   let html = "";
@@ -81,6 +87,7 @@ function renderBoard(board) {
   document.getElementById("statsAndOptions").innerHTML = html;
 }
 
+// Determine configuration of next step in board's evolution.
 // Sum values of 8 neighboring cells, as outlined above.
 // if value in first array is 1, apply first three rules and set value in next board array.
 // if value in first array is 0, apply fourth rule, and set value in next board array.
@@ -131,14 +138,20 @@ let neighbors = [];
       neighbors = [];
     }
   }
+
   for (let i = 0; i < board.grid.length; i++) {
     for (let j = 0; j < board.grid.length; j++) {
       board.grid[i][j] = nextBoard.grid[i][j];
     }
   }
+
   board.numGenerations += 1;
 
   renderBoard(board);
+
+  // Determine whether number of living tiles has changed in last two generations; 
+  // If it hasn't, then stop the board. 
+
   if (lastNumLiving === board.numLiving) {
     board.staticGenerations += 1;
     if (board.staticGenerations > 2) {
@@ -150,7 +163,6 @@ let neighbors = [];
     board.staticGenerations = 0;
   }
 }
-
 
 function startBoard(board) {
   let stopButton = document.getElementById('stop');

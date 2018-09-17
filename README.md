@@ -14,6 +14,8 @@ of the board; whether a square is alive or dead in the next round depends on the
 number of its neighbors that are alive. Unusual and interesting patterns form,
 some lasting briefly, others a long time, and others persist seemingly without end.
 
+![Conway's game of life demo](conway_screenshots.gif)
+
 ## Technology
 
 This version is a simple implementation of the grid game, with a random
