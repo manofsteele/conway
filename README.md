@@ -2,7 +2,7 @@
 
 [Live site](https://manofsteele.github.io/conway)
 
-[Wikipedia on Conway's game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
+[Wikipedia on Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
 ## Background
 
@@ -24,7 +24,7 @@ set of 50% of the squares set to alive at the beginning. The grid is
 counted as neighbors for the purposes of the game, and formations that move
 across the edge and creep back onto the grid at the other end of the grid.
 
-This project is be implemented in Javascript, HTML and CSS. The logic of the game
+This project is be implemented in JavaScript, HTML and CSS. The logic of the game
 is contained in a single script. The board is stored in a plain JavaScript object,
 with properties for the grid and other values needed for the game:
 
