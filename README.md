@@ -40,6 +40,30 @@ let board = {
 };
 ```
 
+The redrawing algorithm iterates over each square in the grid, and assembles an array 
+of all eight of its neighbors. Each cell in the grid has either a value of 0 (dead) or 
+1 (living). These are added up, and the cell's value in the next stage of the game is 
+determined: 
+
+```javascript
+if (board.grid[i][j] === 0) {
+  sum === 3 ? nextBoard.grid[i][j] = 1 : nextBoard.grid[i][j] = 0;
+} else {
+  switch (sum) {
+    case 0: case 1:
+      nextBoard.grid[i][j] = 0;
+      break;
+    case 2: case 3:
+      nextBoard.grid[i][j] = 1;
+      break;
+    default:
+      nextBoard.grid[i][j] = 0;
+  }
+  board.numLiving++;
+}
+```
+This algorithm is fine for a small implentation like this one, and it is the easiest to implement; to achieve better performance on a larger grid, other, more efficient algorithms should be considered. 
+
 ## Features
 
 * There is a short explanation of the game's rules and history.
